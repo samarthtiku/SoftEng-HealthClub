@@ -243,7 +243,9 @@ public class Console {
                 system.sendMonthlyExpiryNotices();
                 break;
             case "2":
-                System.out.println("Visit report functionality coming soon.");
+                System.out.print("Enter UserID for visit report: ");
+                String userID = scanner.nextLine();
+                displayMemberDetails(userID);
                 break;
             case "3":
                 listCurrentUsers();
