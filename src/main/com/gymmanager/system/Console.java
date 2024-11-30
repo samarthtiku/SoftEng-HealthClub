@@ -126,6 +126,7 @@ public class Console {
                 } else {
                     System.out.println("Invalid membership or expired.");
                 }
+                displayMemberDetails(memberId);
                 showHomeScreen("staff");
                 break;
             case "2":
@@ -319,6 +320,31 @@ public class Console {
                 break;
             default:
                 System.out.println("Invalid choice.");
+        }
+    }
+
+    private void displayMemberDetails(String memberId) {
+        System.out.println("\n=== Member Details ===");
+        User user = system.getUsers().get(memberId);
+        if (user != null) {
+            System.out.println("User ID: " + user.getUserID());
+            System.out.println("Email: " + user.getEmail());
+            System.out.println("Type: " + user.getType());
+
+            Membership membership = system.getMembership(user.getUserID());
+            if (membership != null) {
+                System.out.println("Membership Status: " + (membership.checkStatus() ? "Active" : "Expired"));
+                System.out.println("Membership Type: " + membership.getType());
+                System.out.println("Expiration Date: " + membership.getExpirationDate());
+            }
+
+            MemberAdmission admission = system.getAdmission(user.getUserID());
+            if (admission != null) {
+                System.out.println("Last Visit: " + admission.getLastVisit());
+                System.out.println("Visit Frequency: " + admission.getVisitFrequency());
+            }
+        } else {
+            System.out.println("Member not found.");
         }
     }
 }
