@@ -6,10 +6,12 @@ import java.util.Scanner;
 public class Console {
     private Screen currentScreen;
     private Scanner scanner;
+    private GymSystem system;
 
-    public Console() {
+    public Console(GymSystem system) {
         this.scanner = new Scanner(System.in);
         this.currentScreen = Screen.LOGIN_SCREEN;
+        this.system = system;
     }
 
     public void showLoginScreen() {
@@ -18,12 +20,19 @@ public class Console {
         String userID = scanner.nextLine();
         System.out.print("Password: ");
         String password = scanner.nextLine();
-        // Process login...
+
+        if (system.verifyLogin(userID, password)) {
+            currentScreen = Screen.HOME_SCREEN;
+            showHomeScreen(getUserType(userID));
+        } else {
+            System.out.println("Invalid credentials. Please try again.");
+        }
     }
 
     public void showHomeScreen(String userType) {
         System.out.println("\n=== Welcome " + userType + " ===");
         displayMenuOptions(userType);
+        handleMenuSelection(userType);
     }
 
     private void displayMenuOptions(String userType) {
@@ -48,5 +57,16 @@ public class Console {
                 System.out.println("2. Logout");
                 break;
         }
+    }
+
+    private String getUserType(String userID) {
+        // In a real implementation, this would get the type from the User object
+        return "member"; // Simplified for demonstration
+    }
+
+    private void handleMenuSelection(String userType) {
+        System.out.print("\nSelect an option: ");
+        String selection = scanner.nextLine();
+        // Handle menu selection based on user type
     }
 }
