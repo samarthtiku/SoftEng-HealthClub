@@ -165,6 +165,7 @@ public class Console {
         }
     }
 
+    // Renew membership (note: current implementation only changes membership)
     private void handleRenewMembership() {
         System.out.println("\n=== Renew Membership ===");
         System.out.print("Enter Member ID: ");
@@ -199,6 +200,8 @@ public class Console {
         }
     }
 
+    // Note: this method isn't functional since there is no backend
+    // Users need to be added manually in the code
     private void handleCreateMembership() {
         System.out.println("\n=== Create New Membership ===");
         System.out.print("Enter new Member ID: ");
@@ -278,6 +281,7 @@ public class Console {
         }
     }
 
+    // Note: this method isn't functional since there is no backend
     private void handleEditUserDatabase() {
         System.out.println("\n=== Edit User Database ===");
         System.out.println("1. Add User");
@@ -326,6 +330,8 @@ public class Console {
                 System.out.println("Membership Status: " + (membership.checkStatus() ? "Active" : "Expired"));
                 System.out.println("Membership Type: " + membership.getType());
                 System.out.println("Expiration Date: " + membership.getExpirationDate());
+            } else {
+                System.out.println("Membership Status: No membership found.");
             }
 
             MemberAdmission admission = system.getAdmission(user.getUserID());

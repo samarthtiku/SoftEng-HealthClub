@@ -18,9 +18,6 @@ public class GymSystem {
 
         // Add some sample data for testing
         setupSampleData();
-
-        // Add test user, membership, and admission data manually
-        addTestUserData();
     }
 
     private void setupSampleData() {
@@ -41,10 +38,6 @@ public class GymSystem {
                 LocalDate.now().plusMonths(6), "SIX_MONTHS");
         addMembership(membership);
 
-    }
-
-    // test user member #2
-    private void addTestUserData() {
         // Create a test user
         User testUser = new User("TEST123", "test123", "test@gym.com", "member");
         addUser(testUser);
@@ -53,6 +46,10 @@ public class GymSystem {
         Membership testMembership = new Membership("TEST123",
                 LocalDate.now().plusMonths(1), "ONE_MONTH");
         addMembership(testMembership);
+
+        // Create a test user with NO membership
+        User member3 = new User("NOMEM123", "NOMEM123", "test@gym.com", "member");
+        addUser(member3);
 
     }
 
