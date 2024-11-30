@@ -18,6 +18,9 @@ public class GymSystem {
 
         // Add some sample data for testing
         setupSampleData();
+
+        // Add test user, membership, and admission data manually
+        addTestUserData();
     }
 
     private void setupSampleData() {
@@ -37,6 +40,23 @@ public class GymSystem {
         // Create a sample management user
         User manager = new User("MGMT123", "mgmt123", "manager@gym.com", "management");
         addUser(manager);
+    }
+
+    // Add test user, membership, and admission data
+    private void addTestUserData() {
+        // Create a test user
+        User testUser = new User("TEST123", "test123", "test@gym.com", "member");
+        addUser(testUser);
+
+        // Create a test membership
+        Membership testMembership = new Membership("TEST123",
+                LocalDate.now().plusMonths(1), "ONE_MONTH");
+        addMembership(testMembership);
+
+        // Create a test admission
+        MemberAdmission testAdmission = new MemberAdmission("TEST123");
+        testAdmission.logVisit();
+        admissions.put("TEST123", testAdmission);
     }
 
     public boolean checkMembershipStatus(String userID) {
@@ -87,6 +107,10 @@ public class GymSystem {
                         System.out.println("Sending notice to: " + user.getEmail());
                     }
                 });
+    }
+
+    public Map<String, User> getUsers() {
+        return users;
     }
 
     public static void main(String[] args) {

@@ -48,4 +48,8 @@ public class Membership {
                 break;
         }
     }
+
+    public String getType() {
+        return membershipLength;
+    }
 }

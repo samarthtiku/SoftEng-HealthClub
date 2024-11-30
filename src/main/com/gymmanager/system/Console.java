@@ -244,6 +244,7 @@ public class Console {
         System.out.println("\n=== Generate Report ===");
         System.out.println("1. Membership Expiry Report");
         System.out.println("2. Member Visit Report");
+        System.out.println("3. List of Current Users");
 
         System.out.print("Choose report type: ");
         String choice = scanner.nextLine();
@@ -255,8 +256,34 @@ public class Console {
             case "2":
                 System.out.println("Visit report functionality coming soon.");
                 break;
+            case "3":
+                listCurrentUsers();
+                break;
             default:
                 System.out.println("Invalid choice.");
+        }
+    }
+
+    private void listCurrentUsers() {
+        System.out.println("\n=== List of Current Users ===");
+        for (User user : system.getUsers().values()) {
+            System.out.println("User ID: " + user.getUserID());
+            System.out.println("Email: " + user.getEmail());
+            System.out.println("Type: " + user.getType());
+
+            Membership membership = system.getMembership(user.getUserID());
+            if (membership != null) {
+                System.out.println("Membership Status: " + (membership.checkStatus() ? "Active" : "Expired"));
+                System.out.println("Membership Type: " + membership.getType());
+                System.out.println("Expiration Date: " + membership.getExpirationDate());
+            }
+
+            MemberAdmission admission = system.getAdmission(user.getUserID());
+            if (admission != null) {
+                System.out.println("Last Visit: " + admission.getLastVisit());
+                System.out.println("Visit Frequency: " + admission.getVisitFrequency());
+            }
+            System.out.println();
         }
     }
 
