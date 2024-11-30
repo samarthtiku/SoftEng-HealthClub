@@ -1,7 +1,7 @@
 # SoftEng-HealthClub
 # 🏋️‍♂️ Gym Management System
 
-Welcome to our state-of-the-art gym management system! 💪
+Welcome to our SoftEng-HealthClub gym management system! 💪
 
 ## 🌟 Quick Start Guide
 
