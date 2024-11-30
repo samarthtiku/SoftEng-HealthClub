@@ -86,19 +86,7 @@ public class Console {
         switch(selection) {
             case "1":
                 // View Account Details
-                System.out.println("\n=== Account Details ===");
-                System.out.println("Member ID: " + currentUserID);
-                Membership membership = system.getMembership(currentUserID);
-                if (membership != null) {
-                    System.out.println("Membership Status: " + (membership.checkStatus() ? "Active" : "Expired"));
-                    System.out.println("Expiration Date: " + membership.getExpirationDate());
-
-                    MemberAdmission admission = system.getAdmission(currentUserID);
-                    if (admission != null) {
-                        System.out.println("Last Visit: " + admission.getLastVisit());
-                        System.out.println("Visit Frequency: " + admission.getVisitFrequency());
-                    }
-                }
+                displayMemberDetails(currentUserID);
                 showHomeScreen("member");
                 break;
             case "2":
@@ -342,6 +330,8 @@ public class Console {
             if (admission != null) {
                 System.out.println("Last Visit: " + admission.getLastVisit());
                 System.out.println("Visit Frequency: " + admission.getVisitFrequency());
+            } else {
+                System.out.println("No admission records found.");
             }
         } else {
             System.out.println("Member not found.");

@@ -28,6 +28,10 @@ public class GymSystem {
         User staffMember = new User("STAFF123", "staff123", "staff@gym.com", "staff");
         addUser(staffMember);
 
+        // Create a sample management user
+        User manager = new User("MGMT123", "mgmt123", "manager@gym.com", "management");
+        addUser(manager);
+
         // Create a sample member
         User member = new User("USER123", "pass123", "user@gym.com", "member");
         addUser(member);
@@ -37,12 +41,9 @@ public class GymSystem {
                 LocalDate.now().plusMonths(6), "SIX_MONTHS");
         addMembership(membership);
 
-        // Create a sample management user
-        User manager = new User("MGMT123", "mgmt123", "manager@gym.com", "management");
-        addUser(manager);
     }
 
-    // Add test user, membership, and admission data
+    // test user member #2
     private void addTestUserData() {
         // Create a test user
         User testUser = new User("TEST123", "test123", "test@gym.com", "member");
@@ -53,10 +54,6 @@ public class GymSystem {
                 LocalDate.now().plusMonths(1), "ONE_MONTH");
         addMembership(testMembership);
 
-        // Create a test admission
-        MemberAdmission testAdmission = new MemberAdmission("TEST123");
-        testAdmission.logVisit();
-        admissions.put("TEST123", testAdmission);
     }
 
     public boolean checkMembershipStatus(String userID) {
@@ -121,6 +118,7 @@ public class GymSystem {
         System.out.println("Sample login credentials:");
         System.out.println("Staff - UserID: STAFF123, Password: staff123");
         System.out.println("Member - UserID: USER123, Password: pass123");
+        System.out.println("Member - UserID: TEST123, Password: test123");
         System.out.println("Management - UserID: MGMT123, Password: mgmt123\n");
 
         console.showLoginScreen();
