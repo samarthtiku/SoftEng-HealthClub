@@ -2,6 +2,7 @@ package com.gymmanager.system;
 
 import com.gymmanager.model.*;
 import java.util.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class GymSystem {
@@ -14,6 +15,28 @@ public class GymSystem {
         this.users = new HashMap<>();
         this.memberships = new HashMap<>();
         this.admissions = new HashMap<>();
+
+        // Add some sample data for testing
+        setupSampleData();
+    }
+
+    private void setupSampleData() {
+        // Create a sample staff member
+        User staffMember = new User("STAFF123", "staff123", "staff@gym.com", "staff");
+        addUser(staffMember);
+
+        // Create a sample member
+        User member = new User("USER123", "pass123", "user@gym.com", "member");
+        addUser(member);
+
+        // Create a sample membership
+        Membership membership = new Membership("USER123",
+                LocalDate.now().plusMonths(6), "SIX_MONTHS");
+        addMembership(membership);
+
+        // Create a sample management user
+        User manager = new User("MGMT123", "mgmt123", "manager@gym.com", "management");
+        addUser(manager);
     }
 
     public boolean checkMembershipStatus(String userID) {
@@ -45,8 +68,16 @@ public class GymSystem {
         memberships.put(membership.getUserID(), membership);
     }
 
+    public Membership getMembership(String userID) {
+        return memberships.get(userID);
+    }
+
+    public String getUserType(String userID) {
+        User user = users.get(userID);
+        return user != null ? user.getType() : null;
+    }
+
     public void sendMonthlyExpiryNotices() {
-        // In a real system, this would connect to an email service
         memberships.values().stream()
                 .filter(Membership::isExpiringIn30Days)
                 .forEach(membership -> {
@@ -56,5 +87,18 @@ public class GymSystem {
                         System.out.println("Sending notice to: " + user.getEmail());
                     }
                 });
+    }
+
+    public static void main(String[] args) {
+        GymSystem system = new GymSystem();
+        Console console = new Console(system);
+
+        System.out.println("\nWelcome to the Gym Management System!");
+        System.out.println("Sample login credentials:");
+        System.out.println("Staff - UserID: STAFF123, Password: staff123");
+        System.out.println("Member - UserID: USER123, Password: pass123");
+        System.out.println("Management - UserID: MGMT123, Password: mgmt123\n");
+
+        console.showLoginScreen();
     }
 }
