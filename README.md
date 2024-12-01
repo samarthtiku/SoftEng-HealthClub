@@ -10,6 +10,12 @@ Welcome to our SoftEng-HealthClub gym management system! 💪
 👤 Member:
 - UserID: USER123
 - Password: pass123
+👤 Member:
+- UserID: TEST123
+- Password: test123
+👤 User with NO membership:
+- UserID: NOMEM123
+- Password: NOMEM123
 
 👨‍💼 Staff:
 - UserID: STAFF123
